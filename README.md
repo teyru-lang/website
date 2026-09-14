@@ -60,6 +60,32 @@ Connect the repository with:
 - **Node version:** `.node-version` pins `22.14.0` (Cloudflare Pages reads it, and
   `engines.node` in `package.json` is `>=22`).
 
+## Deploy
+
+The site is the Cloudflare Pages project `teyru`, and `teyru.dev` points at it
+(`CNAME teyru.dev -> teyru.pages.dev`, proxied, next to the domain's mail records).
+Three ways to publish, in the order they are worth setting up:
+
+**The dashboard's Git integration, once.** Workers & Pages → the `teyru` project →
+Settings → Builds & deployments → Connect to Git, and authorize the Cloudflare GitHub
+App for the `teyru-lang` organisation. The two values above are what it asks for, and
+every push to `main` builds and deploys from then on. Nothing to keep in the repository.
+
+**GitHub Actions, on every push.** `.github/workflows/deploy.yml` builds the site and
+runs `wrangler pages deploy`. It needs two repository secrets:
+
+| Secret | Where it comes from |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN` | A token with the *Cloudflare Pages: Edit* permission |
+| `CLOUDFLARE_ACCOUNT_ID` | The account id in the Cloudflare dashboard URL |
+
+**By hand**, with a token in the environment:
+
+```sh
+npm ci && npm run build
+CLOUDFLARE_API_TOKEN=... npx wrangler pages deploy dist --project-name=teyru --branch=main
+```
+
 ## Locales and themes
 
 The three dictionaries in `src/i18n.ts` are typed as `Record<Lang, Messages>`, so a
