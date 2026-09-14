@@ -13,6 +13,8 @@ import {
 } from "./i18n.js";
 import { applyTheme, persistTheme, storedTheme, systemTheme, type Theme } from "./theme.js";
 
+let currentLang: Lang = "en";
+
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
   if (element === null) {
@@ -22,6 +24,7 @@ function required<T extends Element>(selector: string): T {
 }
 
 function applyLang(lang: Lang): void {
+  currentLang = lang;
   const messages = MESSAGES[lang];
 
   for (const element of document.querySelectorAll<HTMLElement>("[data-i18n]")) {
@@ -91,6 +94,35 @@ function initTheme(): void {
   });
 }
 
+function initInstall(): void {
+  const command = required<HTMLElement>("#install-command");
+  command.textContent = INSTALL_COMMAND;
+
+  const button = document.querySelector<HTMLButtonElement>("#copy");
+  if (button === null || !("clipboard" in navigator)) {
+    button?.remove();
+    return;
+  }
+
+  let resetTimer = 0;
+  button.addEventListener("click", () => {
+    navigator.clipboard.writeText(command.textContent ?? "").then(
+      () => {
+        window.clearTimeout(resetTimer);
+        button.classList.add("is-copied");
+        button.setAttribute("aria-label", MESSAGES[currentLang].copied);
+        resetTimer = window.setTimeout(() => {
+          button.classList.remove("is-copied");
+          button.setAttribute("aria-label", MESSAGES[currentLang].copy);
+        }, 1600);
+      },
+      () => {
+        // The clipboard refused: the command stays selectable by hand.
+      },
+    );
+  });
+}
+
 initLanguage();
 initTheme();
-required<HTMLElement>("#install-command").textContent = INSTALL_COMMAND;
+initInstall();

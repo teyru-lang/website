@@ -1,17 +1,20 @@
 /*
- * Teyru landing page. Two themes, three locales, no dependencies.
- * Colours are plain custom properties so the contrast of each pair can be checked
- * with a luminance calculation; see README.md for the measured ratios.
+ * Teyru landing page. Two themes, three locales, no dependencies, system fonts only.
+ *
+ * Every colour pair used for text is listed with its measured WCAG contrast ratio in
+ * README.md, so a change here can be re-checked against the same numbers.
  */
 
 :root {
   color-scheme: light;
 
   --bg: #ffffff;
+  --surface: #f7f9fc;
+  --surface-2: #eef2f8;
   --fg: #14171c;
   --muted: #4c5563;
-  --border: #e2e6ec;
-  --rule: #eef1f5;
+  --border: #dfe4ec;
+  --rule: #edf0f5;
 
   --accent: #1050c8;
   --accent-fg: #ffffff;
@@ -21,21 +24,38 @@
   --control-fg: #14171c;
   --control-border: #d3d9e2;
 
+  --glow: rgba(16, 80, 200, 0.14);
+  --grid: rgba(20, 23, 28, 0.06);
+  --shadow: 0 1px 2px rgba(16, 20, 28, 0.05), 0 20px 44px -34px rgba(16, 20, 28, 0.4);
+
+  --tok-keyword: #0b46b8;
+  --tok-type: #8a4708;
+  --tok-string: #126b3a;
+  --tok-name: #14171c;
+  --tok-punct: #5f6875;
+
+  --wordmark-from: #14171c;
+  --wordmark-to: #2b3345;
+
   --sans:
     system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans TC",
-    "Noto Sans SC", "PingFang TC", "Microsoft JhengHei", "Hiragino Sans", sans-serif;
+    "Noto Sans SC", "Noto Sans CJK TC", "PingFang TC", "PingFang SC", "Microsoft JhengHei",
+    "Microsoft YaHei", "Hiragino Sans", sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
   --gutter: clamp(1.25rem, 4vw, 3rem);
+  --band: clamp(2.5rem, 7vh, 4.5rem);
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
 
   --bg: #0b0d10;
+  --surface: #10141a;
+  --surface-2: #151a22;
   --fg: #f2f5f8;
   --muted: #9aa5b4;
-  --border: #242a33;
+  --border: #262d37;
   --rule: #171c23;
 
   --accent: #7aa7ff;
@@ -45,6 +65,19 @@
   --control-bg: #121720;
   --control-fg: #f2f5f8;
   --control-border: #2c333d;
+
+  --glow: rgba(122, 167, 255, 0.13);
+  --grid: rgba(242, 245, 248, 0.055);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 20px 44px -30px rgba(0, 0, 0, 0.9);
+
+  --tok-keyword: #8fb2ff;
+  --tok-type: #f0b37e;
+  --tok-string: #86d9a2;
+  --tok-name: #f2f5f8;
+  --tok-punct: #97a2b2;
+
+  --wordmark-from: #ffffff;
+  --wordmark-to: #ccd7e6;
 }
 
 * {
@@ -61,7 +94,16 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(64rem 34rem at 50% -14%, var(--glow), transparent 70%),
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    4.5rem 4.5rem,
+    4.5rem 4.5rem;
+  background-repeat: no-repeat, repeat, repeat;
   color: var(--fg);
   font-family: var(--sans);
   font-size: 16px;
@@ -73,7 +115,12 @@ body {
 :focus-visible {
   outline: 2px solid var(--fg);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
 }
 
 .visually-hidden {
@@ -95,6 +142,13 @@ body {
   padding: var(--gutter) var(--gutter) 0;
 }
 
+.topbar,
+.showcase,
+.facts-band {
+  width: min(72rem, 100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
 .controls {
   display: flex;
   align-items: center;
@@ -108,7 +162,8 @@ body {
   background: var(--control-bg);
   border: 1px solid var(--control-border);
   border-radius: 999px;
-  padding: 0.4rem 0.8rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
   transition:
     border-color 120ms ease,
     background-color 120ms ease;
@@ -122,15 +177,14 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
   padding: 0;
   cursor: pointer;
 }
 
 .icon {
-  width: 1.15rem;
-  height: 1.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 .icon-sun {
@@ -153,30 +207,40 @@ body {
 /* Hero -------------------------------------------------------------------- */
 
 .hero {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(1rem, 2.5vw, 1.75rem);
-  padding: clamp(2rem, 8vh, 6rem) var(--gutter) clamp(2.5rem, 10vh, 7rem);
+  gap: clamp(1.1rem, 2.4vw, 1.9rem);
+  min-height: clamp(30rem, 64vh, 46rem);
+  padding: clamp(2.5rem, 9vh, 6rem) clamp(1.5rem, 5vw, 3rem) clamp(2rem, 6vh, 3.5rem);
   text-align: center;
 }
 
 .wordmark {
   margin: 0;
-  font-size: clamp(3.75rem, 23vw, 17rem);
+  font-size: clamp(3.75rem, 22vw, 16rem);
   font-weight: 800;
   line-height: 0.88;
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
 
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .wordmark {
+    background-image: linear-gradient(180deg, var(--wordmark-from), var(--wordmark-to));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}
+
 .tagline {
   margin: 0;
-  max-width: 44ch;
+  max-width: 32rem;
   color: var(--muted);
-  font-size: clamp(1rem, 1.1rem + 0.5vw, 1.3125rem);
+  font-size: clamp(1.0625rem, 1rem + 0.45vw, 1.3125rem);
+  line-height: 1.55;
   text-wrap: balance;
 }
 
@@ -184,14 +248,15 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: clamp(0.25rem, 1vw, 0.75rem);
-  padding: 0.75rem 1.5rem;
+  margin-top: clamp(0.25rem, 1.5vw, 0.9rem);
+  padding: 0.8rem 1.6rem;
   border-radius: 999px;
   background: var(--accent);
   color: var(--accent-fg);
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
+  box-shadow: var(--shadow);
   transition:
     background-color 120ms ease,
     transform 120ms ease;
@@ -213,6 +278,234 @@ body {
   transform: translateX(3px);
 }
 
+/* Showcase ---------------------------------------------------------------- */
+
+.showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  align-items: stretch;
+}
+
+@media (max-width: 56rem) {
+  .showcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.6rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.card-title {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.card-file {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  gap: 0.9rem;
+  padding: 1.15rem 1rem;
+}
+
+.code {
+  margin: 0;
+  padding: 1.05rem clamp(0.85rem, 2vw, 1.15rem) 1.2rem;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: clamp(0.6875rem, 0.66rem + 0.4vw, 0.875rem);
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.tok-k {
+  color: var(--tok-keyword);
+}
+
+.tok-t {
+  color: var(--tok-type);
+}
+
+.tok-s {
+  color: var(--tok-string);
+}
+
+.tok-f {
+  color: var(--tok-name);
+}
+
+.tok-p {
+  color: var(--tok-punct);
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.7rem 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.prompt {
+  color: var(--tok-punct);
+  user-select: none;
+}
+
+.command code {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 120ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.copy:hover {
+  color: var(--fg);
+  border-color: var(--muted);
+}
+
+.copy-icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copy-icon-check {
+  display: none;
+  stroke-width: 2;
+}
+
+.copy.is-copied {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.copy.is-copied .copy-icon-copy {
+  display: none;
+}
+
+.copy.is-copied .copy-icon-check {
+  display: block;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* Facts ------------------------------------------------------------------- */
+
+.facts-band {
+  margin-top: var(--band);
+  padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+
+.band-title {
+  margin: 0 0 clamp(1rem, 2.5vh, 1.6rem);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.1rem, 3vw, 1.9rem) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+@media (min-width: 40rem) and (max-width: 62rem) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 62rem) {
+  .facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.fact {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.9rem;
+}
+
+.fact dt {
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.fact dd {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
 /* Footer ------------------------------------------------------------------ */
 
 .footer {
@@ -221,7 +514,8 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem 1.5rem;
-  padding: 1.25rem var(--gutter) 1.5rem;
+  margin-top: var(--band);
+  padding: 1.35rem var(--gutter) 2rem;
   border-top: 1px solid var(--rule);
   color: var(--muted);
   font-size: 0.875rem;
@@ -280,6 +574,12 @@ body {
     animation-delay: 120ms;
   }
 
+  .showcase,
+  .facts-band {
+    animation: rise 500ms ease-out both;
+    animation-delay: 160ms;
+  }
+
   @keyframes rise {
     from {
       opacity: 0;
@@ -293,6 +593,15 @@ body {
 }
 
 @media (max-width: 30rem) {
+  .hero {
+    min-height: 0;
+    padding-top: clamp(2rem, 8vh, 3rem);
+  }
+
+  .card-body {
+    padding: 0.9rem;
+  }
+
   .footer {
     justify-content: center;
     text-align: center;

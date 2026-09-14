@@ -3,17 +3,19 @@
 The landing page for [Teyru](https://github.com/teyru-lang/Teyru), served at
 <https://teyru.dev> from Cloudflare Pages.
 
-One page: the wordmark, the subtitle, a link to the documentation, and a footer with the
-documentation, the compiler repository and the install command. No UI framework, no
-runtime dependencies — the theme switch, the locale detection and the DOM wiring are
-hand-written TypeScript in `src/`, compiled by `tsc` and copied into `dist/`.
+One page: the wordmark, the subtitle and a link to the documentation, then a
+`hello.teyru` snippet beside the install command (with a copy button), a band of short
+facts about the compiler, and a footer with the documentation, the compiler repository
+and the install line. No UI framework, no runtime dependencies — the theme switch, the
+locale detection and the DOM wiring are hand-written TypeScript in `src/`, compiled by
+`tsc` and copied into `dist/`.
 
 ## Layout
 
 | Path                | What it is                                                        |
 | ------------------- | ----------------------------------------------------------------- |
 | `index.html`        | The page; sets the theme attribute inline before the first paint. |
-| `styles.css`        | Both themes and the layout.                                       |
+| `styles.css`        | Both themes, the type scale and the layout.                       |
 | `src/i18n.ts`       | The `zh-TW`, `zh-CN` and `en` dictionaries, lookup, detection.    |
 | `src/theme.ts`      | Theme resolution, `<html data-theme>`, `localStorage`.            |
 | `src/main.ts`       | Wiring: language control, `<html lang>`, meta tags, text nodes.   |
@@ -103,10 +105,27 @@ flashes the wrong theme.
 
 ## Contrast
 
-All text colours were checked against their background with the WCAG relative-luminance
-formula (ratios are `(L_lighter + 0.05) / (L_darker + 0.05)`); the lowest pair in use is
-the light-theme accent at 6.9:1. The measured values are recorded in the commit message
-that introduced them.
+Every text colour was checked against the background it is actually painted on, using
+the WCAG relative-luminance formula `(L_lighter + 0.05) / (L_darker + 0.05)`. The lowest
+pair on the page is the punctuation colour inside the light-theme code block at 5.35:1;
+nothing is below 4.5:1.
+
+| Pair                                       | Light    | Dark     |
+| ------------------------------------------ | -------- | -------- |
+| body text on page background               | 17.96:1  | 17.78:1  |
+| subtitle / facts text on background        | 7.54:1   | 7.80:1   |
+| link and accent text on background         | 6.99:1   | 8.15:1   |
+| button label on button                     | 6.99:1   | 8.15:1   |
+| wordmark, lightest end of the gradient     | 12.63:1  | 13.37:1  |
+| code keyword / type / string               | 7.71 / 6.67 / 6.24 | 8.78 / 10.07 / 10.96 |
+| code punctuation                           | 5.35:1   | 7.15:1   |
+| card header label on the header strip      | 6.71:1   | 7.00:1   |
+| footer install command on its own panel    | 15.72:1  | 15.64:1  |
+
+The hairlines, the background grid and the radial glow are decoration and carry no text.
+The one animation (the hero rising into place) is inside
+`@media (prefers-reduced-motion: no-preference)`, so it never runs for a visitor who has
+asked for reduced motion.
 
 ## Licence
 
