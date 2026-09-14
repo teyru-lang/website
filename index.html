@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teyru</title>
+    <meta
+      name="description"
+      content="Teyru is a language in the shape of Java that compiles straight to a native executable. No JVM, no bytecode."
+    />
+    <link rel="canonical" href="https://teyru.dev/" />
+    <meta name="color-scheme" content="light dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Teyru" />
+    <meta property="og:title" content="Teyru" />
+    <meta
+      property="og:description"
+      content="Teyru is a language in the shape of Java that compiles straight to a native executable. No JVM, no bytecode."
+    />
+    <meta property="og:url" content="https://teyru.dev/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="zh_TW" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Teyru" />
+    <meta
+      name="twitter:description"
+      content="Teyru is a language in the shape of Java that compiles straight to a native executable. No JVM, no bytecode."
+    />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b0d10'/><text x='16' y='24' font-family='system-ui,sans-serif' font-size='21' font-weight='700' fill='%23ffffff' text-anchor='middle'>T</text></svg>"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Runs before the first paint so the page never flashes the wrong theme.
+         The storage key and the attribute must match src/theme.ts. -->
+    <script>
+      (function () {
+        var stored = null;
+        try {
+          stored = window.localStorage.getItem("teyru:theme");
+        } catch (error) {
+          stored = null;
+        }
+        var theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <div class="controls">
+        <label class="visually-hidden" for="language" data-i18n="langLabel">Language</label>
+        <select class="control" id="language"></select>
+        <button
+          class="control icon-button"
+          id="theme"
+          type="button"
+          aria-label="Switch theme"
+          data-i18n-aria="themeLabel"
+        >
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4.1" />
+            <path
+              d="M12 2.2v2.3M12 19.5v2.3M2.2 12h2.3M19.5 12h2.3M5.1 5.1l1.6 1.6M17.3 17.3l1.6 1.6M18.9 5.1l-1.6 1.6M6.7 17.3l-1.6 1.6"
+            />
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.6 14.7A8.7 8.7 0 0 1 9.3 3.4a8.7 8.7 0 1 0 11.3 11.3z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <h1 class="wordmark">Teyru</h1>
+      <p class="tagline" data-i18n="tagline">
+        A Java-shaped language that compiles to a native binary. No JVM, no bytecode.
+      </p>
+      <a class="cta" href="https://docs.teyru.dev/">
+        <span data-i18n="docsCta">Read the documentation</span>
+        <span class="cta-arrow" aria-hidden="true">&#8594;</span>
+      </a>
+    </main>
+
+    <footer class="footer">
+      <nav class="footer-links">
+        <a href="https://docs.teyru.dev/" data-i18n="footerDocs">Documentation</a>
+        <a href="https://github.com/teyru-lang/Teyru" data-i18n="footerGithub">GitHub</a>
+      </nav>
+      <p class="install">
+        <span class="install-label" data-i18n="installLabel">Install the compiler</span>
+        <code id="install-command">go install github.com/teyru-lang/Teyru/cmd/teyru@latest</code>
+      </p>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

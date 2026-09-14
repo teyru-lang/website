@@ -1,0 +1,17 @@
+{
+  "name": "teyru-website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing page for the Teyru language, served at https://teyru.dev.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc && node scripts/copy.mjs",
+    "dev": "npm run build && tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
