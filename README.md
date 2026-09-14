@@ -79,12 +79,17 @@ runs `wrangler pages deploy`. It needs two repository secrets:
 | `CLOUDFLARE_API_TOKEN` | A token with the *Cloudflare Pages: Edit* permission |
 | `CLOUDFLARE_ACCOUNT_ID` | The account id in the Cloudflare dashboard URL |
 
-**By hand**, with a token in the environment:
+**By hand.** On a machine already logged in (`npx wrangler login`), no token is
+needed:
 
 ```sh
 npm ci && npm run build
-CLOUDFLARE_API_TOKEN=... npx wrangler pages deploy dist --project-name=teyru --branch=main
+npx wrangler pages deploy dist --project-name=teyru --branch=main
 ```
+
+With a token in the environment instead, `CLOUDFLARE_API_TOKEN=... ` in front of the
+same command. The first deployment is what makes `teyru.dev` serve; before one exists
+the domain answers with an error because the project is empty.
 
 ## Locales and themes
 
