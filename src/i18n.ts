@@ -20,6 +20,18 @@ export type MessageKey =
   | "factLombokText"
   | "factWebLabel"
   | "factWebText"
+  | "factSessionLabel"
+  | "factSessionText"
+  | "factValidationLabel"
+  | "factValidationText"
+  | "factUploadLabel"
+  | "factUploadText"
+  | "factHttpLabel"
+  | "factHttpText"
+  | "factWebSocketLabel"
+  | "factWebSocketText"
+  | "factThreadsLabel"
+  | "factThreadsText"
   | "factJsonLabel"
   | "factJsonText"
   | "factGcLabel"
@@ -65,7 +77,26 @@ const zhTW: Messages = {
   factLombokLabel: "標註",
   factLombokText: "相容 Lombok，在語意分析階段展開成一般的成員。",
   factWebLabel: "Web 框架",
-  factWebText: "Spring 形狀的容器與 web 層，路由在編譯期產生。",
+  factWebText:
+    "Spring 形狀的容器與 web 層：SpringApplication.run 讀 application.properties，@ConfigurationProperties 綁定設定、@Profile 篩選 bean，還有 @ControllerAdvice、攔截器、靜態檔案與 CORS；路由在編譯期產生。",
+  factSessionLabel: "會話",
+  factSessionText:
+    "Sessions.of(req) 找出請求 cookie 指到的會話；cookie 由伺服器在回應送出前蓋上，所以同一段請求共用一個身分。",
+  factValidationLabel: "驗證",
+  factValidationText:
+    "@NotNull、@Size、@Min、@Max 標在欄位上，由 Validation.check 檢查；綁定出來的物件違反約束時是 400，並指出是哪個欄位。",
+  factUploadLabel: "檔案上傳",
+  factUploadText:
+    "HttpRequest.multipart(name) 取回 multipart 表單裡的那個部分，型別是 MultipartFile：欄位名、原始檔名、Content-Type、內容。",
+  factHttpLabel: "HTTP 客戶端",
+  factHttpText:
+    "Http.get 與 HttpClient 直接送出請求，keep-alive 連線可以接著用；接收迴圈（ServerTask）能跑在自己的執行緒上，所以客戶端與伺服器可以活在同一個程式裡。",
+  factWebSocketLabel: "WebSocket",
+  factWebSocketText:
+    "實作 WebSocketHandler、標上 @WebSocketMapping，就與 controller 一樣被宣告；WebSocketSession 是升級後的那條連線。",
+  factThreadsLabel: "執行緒",
+  factThreadsText:
+    "真正的執行緒：Thread 與 Runnable、真的 synchronized（含方法修飾子）與 Object.wait／notify，收集器會停住每一條執行緒再掃它們的堆疊。",
   factJsonLabel: "JSON 綁定",
   factJsonText: "Gson 形狀，物件綁定由編譯器產生。",
   factGcLabel: "垃圾回收",
@@ -93,7 +124,26 @@ const zhCN: Messages = {
   factLombokLabel: "注解",
   factLombokText: "兼容 Lombok，在语义分析阶段展开成普通的成员。",
   factWebLabel: "Web 框架",
-  factWebText: "Spring 形状的容器与 web 层，路由在编译期生成。",
+  factWebText:
+    "Spring 形状的容器与 web 层：SpringApplication.run 读 application.properties，@ConfigurationProperties 绑定配置、@Profile 筛选 bean，还有 @ControllerAdvice、拦截器、静态文件与 CORS；路由在编译期生成。",
+  factSessionLabel: "会话",
+  factSessionText:
+    "Sessions.of(req) 找出请求 cookie 指到的会话；cookie 由服务器在响应送出前盖上，所以同一段请求共用一个身份。",
+  factValidationLabel: "验证",
+  factValidationText:
+    "@NotNull、@Size、@Min、@Max 标在字段上，由 Validation.check 检查；绑定出来的对象违反约束时是 400，并指出是哪个字段。",
+  factUploadLabel: "文件上传",
+  factUploadText:
+    "HttpRequest.multipart(name) 取回 multipart 表单里的那个部分，类型是 MultipartFile：字段名、原始文件名、Content-Type、内容。",
+  factHttpLabel: "HTTP 客户端",
+  factHttpText:
+    "Http.get 与 HttpClient 直接发出请求，keep-alive 连接可以接着用；接收循环（ServerTask）能跑在自己的线程上，所以客户端与服务器可以活在同一个程序里。",
+  factWebSocketLabel: "WebSocket",
+  factWebSocketText:
+    "实现 WebSocketHandler、标上 @WebSocketMapping，就和 controller 一样被声明；WebSocketSession 是升级后的那条连接。",
+  factThreadsLabel: "线程",
+  factThreadsText:
+    "真正的线程：Thread 与 Runnable、真正的 synchronized（含方法修饰符）与 Object.wait／notify，收集器会停住每一条线程再扫它们的栈。",
   factJsonLabel: "JSON 绑定",
   factJsonText: "Gson 形状，对象绑定由编译器生成。",
   factGcLabel: "垃圾回收",
@@ -122,7 +172,26 @@ const en: Messages = {
   factLombokLabel: "Annotations",
   factLombokText: "Lombok-compatible, expanded into ordinary members during semantic analysis.",
   factWebLabel: "Web framework",
-  factWebText: "A Spring-shaped container and web layer, with the routes compiled.",
+  factWebText:
+    "A Spring-shaped container and web layer: SpringApplication.run reads application.properties, @ConfigurationProperties binds it, @Profile picks beans, and advice, interceptors, static files and CORS are all there — with the routes compiled.",
+  factSessionLabel: "Sessions",
+  factSessionText:
+    "Sessions.of(req) finds the session a request's cookie names, and the server stamps that cookie on the answer on the way out, so a run of requests has one identity.",
+  factValidationLabel: "Validation",
+  factValidationText:
+    "@NotNull, @Size, @Min and @Max on a field, checked by Validation.check; a bound body that breaks one is a 400 that says which field.",
+  factUploadLabel: "Uploads",
+  factUploadText:
+    "HttpRequest.multipart(name) hands back the part a multipart form sent, as a MultipartFile: field name, original filename, content type, bytes.",
+  factHttpLabel: "HTTP client",
+  factHttpText:
+    "Http.get and HttpClient send real requests and reuse a keep-alive connection, and the accept loop (ServerTask) runs on a thread — a client and a server in one program.",
+  factWebSocketLabel: "WebSocket",
+  factWebSocketText:
+    "Implement WebSocketHandler and mark it @WebSocketMapping to have it declared like a controller; WebSocketSession is the connection after the upgrade.",
+  factThreadsLabel: "Threads",
+  factThreadsText:
+    "Real threads: Thread and Runnable, real synchronized (the method modifier too) and Object.wait/notify, with a collector that stops every thread before it traces.",
   factJsonLabel: "JSON binding",
   factJsonText: "Gson-shaped, with the object binding generated by the compiler.",
   factGcLabel: "Garbage collector",

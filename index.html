@@ -153,7 +153,55 @@
           <div class="fact">
             <dt data-i18n="factWebLabel">Web framework</dt>
             <dd data-i18n="factWebText">
-              A Spring-shaped container and web layer, with the routes compiled.
+              A Spring-shaped container and web layer: SpringApplication.run reads
+              application.properties, @ConfigurationProperties binds it, @Profile picks
+              beans, and advice, interceptors, static files and CORS are all there — with
+              the routes compiled.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factSessionLabel">Sessions</dt>
+            <dd data-i18n="factSessionText">
+              Sessions.of(req) finds the session a request's cookie names, and the server
+              stamps that cookie on the answer on the way out, so a run of requests has one
+              identity.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factValidationLabel">Validation</dt>
+            <dd data-i18n="factValidationText">
+              @NotNull, @Size, @Min and @Max on a field, checked by Validation.check; a
+              bound body that breaks one is a 400 that says which field.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factUploadLabel">Uploads</dt>
+            <dd data-i18n="factUploadText">
+              HttpRequest.multipart(name) hands back the part a multipart form sent, as a
+              MultipartFile: field name, original filename, content type, bytes.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factHttpLabel">HTTP client</dt>
+            <dd data-i18n="factHttpText">
+              Http.get and HttpClient send real requests and reuse a keep-alive connection,
+              and the accept loop (ServerTask) runs on a thread — a client and a server in
+              one program.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factWebSocketLabel">WebSocket</dt>
+            <dd data-i18n="factWebSocketText">
+              Implement WebSocketHandler and mark it @WebSocketMapping to have it declared
+              like a controller; WebSocketSession is the connection after the upgrade.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factThreadsLabel">Threads</dt>
+            <dd data-i18n="factThreadsText">
+              Real threads: Thread and Runnable, real synchronized (the method modifier
+              too) and Object.wait/notify, with a collector that stops every thread before
+              it traces.
             </dd>
           </div>
           <div class="fact">
