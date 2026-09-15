@@ -14,10 +14,14 @@ export type MessageKey =
   | "factsTitle"
   | "factNativeLabel"
   | "factNativeText"
+  | "factBackendLabel"
+  | "factBackendText"
   | "factStdlibLabel"
   | "factStdlibText"
   | "factDigestLabel"
   | "factDigestText"
+  | "factZipLabel"
+  | "factZipText"
   | "factLombokLabel"
   | "factLombokText"
   | "factWebLabel"
@@ -74,12 +78,18 @@ const zhTW: Messages = {
   factsTitle: "它是什麼",
   factNativeLabel: "原生執行檔",
   factNativeText: "經由 Go 前端、產生的 C 與 clang/LLVM，編成原生執行檔——沒有 JVM，沒有 bytecode。",
+  factBackendLabel: "後端與平台",
+  factBackendText:
+    "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 今天編得起來也跑得起來：195 支測試程式有 179 支在 Wine 下逐位元組相同；macOS 與 Linux arm64 是 CI 驗證的，不是在這裡驗證的。",
   factStdlibLabel: "標準程式庫",
   factStdlibText:
     "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式、stream、時間與文字。",
   factDigestLabel: "摘要與位元組",
   factDigestText:
     "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 與 HexFormat 都在 Teyru 裡實作；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
+  factZipLabel: "壓縮",
+  factZipText:
+    "deflate 與 gzip 以 Teyru 撰寫。level 0 的輸出與 zlib 逐位元組相同，兩邊也互通：它解得開 JDK 在 level 0、1、6、9 的輸出，JDK 也解得開它的。誠實的那一半：level 6 大約比 zlib 大 1.5%、慢 2.8 倍（量測）——會去對的人自己也會發現。",
   factLombokLabel: "標註",
   factLombokText: "相容 Lombok，在語意分析階段展開成一般的成員。",
   factWebLabel: "Web 框架",
@@ -125,12 +135,18 @@ const zhCN: Messages = {
   factsTitle: "它是什么",
   factNativeLabel: "原生可执行文件",
   factNativeText: "经由 Go 前端、生成的 C 与 clang/LLVM，编译成原生可执行文件——没有 JVM，没有字节码。",
+  factBackendLabel: "后端与平台",
+  factBackendText:
+    "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 今天编得起来也跑得起来：195 支测试程序有 179 支在 Wine 下逐字节相同；macOS 与 Linux arm64 是 CI 验证的，不是在这里验证的。",
   factStdlibLabel: "标准库",
   factStdlibText:
     "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式、stream、时间与文本。",
   factDigestLabel: "摘要与字节",
   factDigestText:
     "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 与 HexFormat 都在 Teyru 里实现；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
+  factZipLabel: "压缩",
+  factZipText:
+    "deflate 与 gzip 以 Teyru 编写。level 0 的输出与 zlib 逐字节相同，两边也互通：它解得开 JDK 在 level 0、1、6、9 的输出，JDK 也解得开它的。诚实的那一半：level 6 大约比 zlib 大 1.5%、慢 2.8 倍（测量）——会去对的人自己也会发现。",
   factLombokLabel: "注解",
   factLombokText: "兼容 Lombok，在语义分析阶段展开成普通的成员。",
   factWebLabel: "Web 框架",
@@ -177,12 +193,18 @@ const en: Messages = {
   factNativeLabel: "Native binary",
   factNativeText:
     "Compiled through a Go front end, generated C and clang/LLVM into a native executable — no JVM, no bytecode.",
+  factBackendLabel: "Back ends and platforms",
+  factBackendText:
+    "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs today — 179 of 195 test programs byte-identical under Wine — while macOS and Linux arm64 are verified by CI rather than here.",
   factStdlibLabel: "Standard library",
   factStdlibText:
     "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions, streams, time and text — and compiled and checked together with every program.",
   factDigestLabel: "Digests and bytes",
   factDigestText:
     "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), CRC32 and HexFormat are implemented in Teyru, and the buffered and binary streams speak Java's modified UTF-8. There is a Scanner too.",
+  factZipLabel: "Compression",
+  factZipText:
+    "Deflate and gzip are written in Teyru. Level 0 output is byte-identical to zlib's, and the two inter-operate both ways: it decodes the JDK's output at levels 0, 1, 6 and 9, and the JDK decodes its. The honest half: at level 6 it is about 1.5% larger and about 2.8x slower than zlib (measured) — anyone who checks will find that anyway.",
   factLombokLabel: "Annotations",
   factLombokText: "Lombok-compatible, expanded into ordinary members during semantic analysis.",
   factWebLabel: "Web framework",
