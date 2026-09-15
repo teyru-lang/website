@@ -16,6 +16,8 @@ export type MessageKey =
   | "factNativeText"
   | "factStdlibLabel"
   | "factStdlibText"
+  | "factDigestLabel"
+  | "factDigestText"
   | "factLombokLabel"
   | "factLombokText"
   | "factWebLabel"
@@ -73,12 +75,16 @@ const zhTW: Messages = {
   factNativeLabel: "原生執行檔",
   factNativeText: "經由 Go 前端、產生的 C 與 clang/LLVM，編成原生執行檔——沒有 JVM，沒有 bytecode。",
   factStdlibLabel: "標準程式庫",
-  factStdlibText: "以 Teyru 本身撰寫，與每個程式一起編譯與檢查。",
+  factStdlibText:
+    "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式、stream、時間與文字。",
+  factDigestLabel: "摘要與位元組",
+  factDigestText:
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 與 HexFormat 都在 Teyru 裡實作；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
   factLombokLabel: "標註",
   factLombokText: "相容 Lombok，在語意分析階段展開成一般的成員。",
   factWebLabel: "Web 框架",
   factWebText:
-    "Spring 形狀的容器與 web 層：SpringApplication.run 讀 application.properties，@ConfigurationProperties 綁定設定、@Profile 篩選 bean，還有 @ControllerAdvice、攔截器、靜態檔案與 CORS；路由在編譯期產生。",
+    "HTTP/1.1 伺服器上的 Spring 形狀容器與 web 層：SpringApplication.run 讀 application.properties，@ConfigurationProperties 綁定設定、@Profile 篩選 bean，還有 @ControllerAdvice、攔截器、靜態檔案與 CORS；路由在編譯期產生。",
   factSessionLabel: "會話",
   factSessionText:
     "Sessions.of(req) 找出請求 cookie 指到的會話；cookie 由伺服器在回應送出前蓋上，所以同一段請求共用一個身分。",
@@ -96,7 +102,7 @@ const zhTW: Messages = {
     "實作 WebSocketHandler、標上 @WebSocketMapping，就與 controller 一樣被宣告；WebSocketSession 是升級後的那條連線。",
   factThreadsLabel: "執行緒",
   factThreadsText:
-    "真正的執行緒：Thread 與 Runnable、真的 synchronized（含方法修飾子）與 Object.wait／notify，收集器會停住每一條執行緒再掃它們的堆疊。",
+    "真正的作業系統執行緒、真正的 synchronized（含方法修飾子）與 Object.wait／notify，加上執行器、latch、原子型別與並行 map——後面這些全部是監視器，不是 lock-free。",
   factJsonLabel: "JSON 綁定",
   factJsonText: "Gson 形狀，物件綁定由編譯器產生。",
   factGcLabel: "垃圾回收",
@@ -120,12 +126,16 @@ const zhCN: Messages = {
   factNativeLabel: "原生可执行文件",
   factNativeText: "经由 Go 前端、生成的 C 与 clang/LLVM，编译成原生可执行文件——没有 JVM，没有字节码。",
   factStdlibLabel: "标准库",
-  factStdlibText: "用 Teyru 本身编写，与每个程序一起编译与检查。",
+  factStdlibText:
+    "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式、stream、时间与文本。",
+  factDigestLabel: "摘要与字节",
+  factDigestText:
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 与 HexFormat 都在 Teyru 里实现；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
   factLombokLabel: "注解",
   factLombokText: "兼容 Lombok，在语义分析阶段展开成普通的成员。",
   factWebLabel: "Web 框架",
   factWebText:
-    "Spring 形状的容器与 web 层：SpringApplication.run 读 application.properties，@ConfigurationProperties 绑定配置、@Profile 筛选 bean，还有 @ControllerAdvice、拦截器、静态文件与 CORS；路由在编译期生成。",
+    "HTTP/1.1 服务器上的 Spring 形状容器与 web 层：SpringApplication.run 读 application.properties，@ConfigurationProperties 绑定配置、@Profile 筛选 bean，还有 @ControllerAdvice、拦截器、静态文件与 CORS；路由在编译期生成。",
   factSessionLabel: "会话",
   factSessionText:
     "Sessions.of(req) 找出请求 cookie 指到的会话；cookie 由服务器在响应送出前盖上，所以同一段请求共用一个身份。",
@@ -143,7 +153,7 @@ const zhCN: Messages = {
     "实现 WebSocketHandler、标上 @WebSocketMapping，就和 controller 一样被声明；WebSocketSession 是升级后的那条连接。",
   factThreadsLabel: "线程",
   factThreadsText:
-    "真正的线程：Thread 与 Runnable、真正的 synchronized（含方法修饰符）与 Object.wait／notify，收集器会停住每一条线程再扫它们的栈。",
+    "真正的操作系统线程、真正的 synchronized（含方法修饰符）与 Object.wait／notify，加上执行器、latch、原子类型与并发 map——后面这些全部是监视器，不是 lock-free。",
   factJsonLabel: "JSON 绑定",
   factJsonText: "Gson 形状，对象绑定由编译器生成。",
   factGcLabel: "垃圾回收",
@@ -168,12 +178,16 @@ const en: Messages = {
   factNativeText:
     "Compiled through a Go front end, generated C and clang/LLVM into a native executable — no JVM, no bytecode.",
   factStdlibLabel: "Standard library",
-  factStdlibText: "Written in Teyru itself, and compiled and checked together with every program.",
+  factStdlibText:
+    "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions, streams, time and text — and compiled and checked together with every program.",
+  factDigestLabel: "Digests and bytes",
+  factDigestText:
+    "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), CRC32 and HexFormat are implemented in Teyru, and the buffered and binary streams speak Java's modified UTF-8. There is a Scanner too.",
   factLombokLabel: "Annotations",
   factLombokText: "Lombok-compatible, expanded into ordinary members during semantic analysis.",
   factWebLabel: "Web framework",
   factWebText:
-    "A Spring-shaped container and web layer: SpringApplication.run reads application.properties, @ConfigurationProperties binds it, @Profile picks beans, and advice, interceptors, static files and CORS are all there — with the routes compiled.",
+    "A Spring-shaped container and web layer over an HTTP/1.1 server: SpringApplication.run reads application.properties, @ConfigurationProperties binds it, @Profile picks beans, and advice, interceptors, static files and CORS are all there — with the routes compiled.",
   factSessionLabel: "Sessions",
   factSessionText:
     "Sessions.of(req) finds the session a request's cookie names, and the server stamps that cookie on the answer on the way out, so a run of requests has one identity.",
@@ -191,7 +205,7 @@ const en: Messages = {
     "Implement WebSocketHandler and mark it @WebSocketMapping to have it declared like a controller; WebSocketSession is the connection after the upgrade.",
   factThreadsLabel: "Threads",
   factThreadsText:
-    "Real threads: Thread and Runnable, real synchronized (the method modifier too) and Object.wait/notify, with a collector that stops every thread before it traces.",
+    "Real operating system threads, real synchronized (the method modifier too) and Object.wait/notify, plus executors, latches, atomics and a concurrent map — those last ones are monitors, not lock-free.",
   factJsonLabel: "JSON binding",
   factJsonText: "Gson-shaped, with the object binding generated by the compiler.",
   factGcLabel: "Garbage collector",

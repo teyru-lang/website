@@ -141,7 +141,16 @@
           <div class="fact">
             <dt data-i18n="factStdlibLabel">Standard library</dt>
             <dd data-i18n="factStdlibText">
-              Written in Teyru itself, and compiled and checked together with every program.
+              Written in Teyru itself — collections, Gson-shaped JSON, regular expressions,
+              streams, time and text — and compiled and checked together with every program.
+            </dd>
+          </div>
+          <div class="fact">
+            <dt data-i18n="factDigestLabel">Digests and bytes</dt>
+            <dd data-i18n="factDigestText">
+              MessageDigest (MD5, SHA-1, SHA-224/256/384/512), CRC32 and HexFormat are
+              implemented in Teyru, and the buffered and binary streams speak Java's modified
+              UTF-8. There is a Scanner too.
             </dd>
           </div>
           <div class="fact">
@@ -153,10 +162,10 @@
           <div class="fact">
             <dt data-i18n="factWebLabel">Web framework</dt>
             <dd data-i18n="factWebText">
-              A Spring-shaped container and web layer: SpringApplication.run reads
-              application.properties, @ConfigurationProperties binds it, @Profile picks
-              beans, and advice, interceptors, static files and CORS are all there — with
-              the routes compiled.
+              A Spring-shaped container and web layer over an HTTP/1.1 server:
+              SpringApplication.run reads application.properties, @ConfigurationProperties
+              binds it, @Profile picks beans, and advice, interceptors, static files and CORS
+              are all there — with the routes compiled.
             </dd>
           </div>
           <div class="fact">
@@ -199,9 +208,9 @@
           <div class="fact">
             <dt data-i18n="factThreadsLabel">Threads</dt>
             <dd data-i18n="factThreadsText">
-              Real threads: Thread and Runnable, real synchronized (the method modifier
-              too) and Object.wait/notify, with a collector that stops every thread before
-              it traces.
+              Real operating system threads, real synchronized (the method modifier too) and
+              Object.wait/notify, plus executors, latches, atomics and a concurrent map —
+              those last ones are monitors, not lock-free.
             </dd>
           </div>
           <div class="fact">
