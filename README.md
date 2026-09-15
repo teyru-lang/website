@@ -66,23 +66,8 @@ Connect the repository with:
 
 The site is the Cloudflare Pages project `teyru`, and `teyru.dev` points at it
 (`CNAME teyru.dev -> teyru.pages.dev`, proxied, next to the domain's mail records).
-Three ways to publish, in the order they are worth setting up:
-
-**The dashboard's Git integration, once.** Workers & Pages → the `teyru` project →
-Settings → Builds & deployments → Connect to Git, and authorize the Cloudflare GitHub
-App for the `teyru-lang` organisation. The two values above are what it asks for, and
-every push to `main` builds and deploys from then on. Nothing to keep in the repository.
-
-**GitHub Actions, on every push.** `.github/workflows/deploy.yml` builds the site and
-runs `wrangler pages deploy`. It needs two repository secrets:
-
-| Secret | Where it comes from |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | A token with the *Cloudflare Pages: Edit* permission |
-| `CLOUDFLARE_ACCOUNT_ID` | The account id in the Cloudflare dashboard URL |
-
-**By hand.** On a machine already logged in (`npx wrangler login`), no token is
-needed:
+It is published **by hand**, from a machine already logged in (`npx wrangler login`):
+no token is needed and nothing deploys on a push.
 
 ```sh
 npm ci && npm run build
@@ -90,8 +75,12 @@ npx wrangler pages deploy dist --project-name=teyru --branch=main
 ```
 
 With a token in the environment instead, `CLOUDFLARE_API_TOKEN=... ` in front of the
-same command. The first deployment is what makes `teyru.dev` serve; before one exists
-the domain answers with an error because the project is empty.
+same command. GitHub Actions is disabled for this organisation and there is no
+workflow file in the repository, so a push builds nothing anywhere; the gate for a
+change is `npm run build` here, which type-checks every locale's dictionary.
+
+The first deployment is what makes `teyru.dev` serve; before one exists the domain
+answers with an error because the project is empty.
 
 ## Locales and themes
 
