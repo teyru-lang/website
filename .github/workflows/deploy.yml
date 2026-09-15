@@ -23,6 +23,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Without the two secrets this job cannot deploy, and failing on every push
+      # says nothing useful: it is not the commit's fault, and a red X that is
+      # always red stops meaning anything. So it checks first, deploys when it
+      # can, and otherwise says exactly what is missing and where it goes. The
+      # build below still runs either way, because a site that does not compile
+      # is worth knowing about whether or not anyone can publish it.
+      - name: do we have the credentials?
+        id: creds
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$TOKEN" ] && [ -n "$ACCOUNT" ]; then
+            echo "have=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "have=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "::notice title=deploy skipped::CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID are not set on this repository, so the site is not published from here."
+              echo "Add them in Settings -> Secrets and variables -> Actions (the token needs the \"Cloudflare Pages: Edit\" permission; the account id is in the dashboard URL), or publish through Cloudflare's own Git integration, which needs no token here."
+              echo "Until then the site is deployed by hand: npm run build && npx wrangler pages deploy dist --project-name=teyru --branch=main"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
@@ -30,6 +54,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - uses: cloudflare/wrangler-action@v3
+        if: steps.creds.outputs.have == 'true'
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
