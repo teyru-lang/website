@@ -22,6 +22,8 @@ export type MessageKey =
   | "factDigestText"
   | "factZipLabel"
   | "factZipText"
+  | "factZoneLabel"
+  | "factZoneText"
   | "factLombokLabel"
   | "factLombokText"
   | "factWebLabel"
@@ -90,6 +92,9 @@ const zhTW: Messages = {
   factZipLabel: "壓縮",
   factZipText:
     "deflate 與 gzip 以 Teyru 撰寫。level 0 的輸出與 zlib 逐位元組相同，兩邊也互通：它解得開 JDK 在 level 0、1、6、9 的輸出，JDK 也解得開它的。誠實的那一半：level 6 大約比 zlib 大 1.5%、慢 2.8 倍（量測）——會去對的人自己也會發現。",
+  factZoneLabel: "時區",
+  factZoneText:
+    "ZoneId、ZoneOffset、ZoneRules 與 ZonedDateTime 以 Teyru 撰寫，讀主機自己的 IANA 資料庫——發行版換上新的時區就自動生效；沒有 tzdata 的主機拿到的是具名拒絕，不是錯誤的偏移。它曾是標準程式庫那份「少了什麼」清單上的最後一條。",
   factLombokLabel: "標註",
   factLombokText: "相容 Lombok，在語意分析階段展開成一般的成員。",
   factWebLabel: "Web 框架",
@@ -147,6 +152,9 @@ const zhCN: Messages = {
   factZipLabel: "压缩",
   factZipText:
     "deflate 与 gzip 以 Teyru 编写。level 0 的输出与 zlib 逐字节相同，两边也互通：它解得开 JDK 在 level 0、1、6、9 的输出，JDK 也解得开它的。诚实的那一半：level 6 大约比 zlib 大 1.5%、慢 2.8 倍（测量）——会去对的人自己也会发现。",
+  factZoneLabel: "时区",
+  factZoneText:
+    "ZoneId、ZoneOffset、ZoneRules 与 ZonedDateTime 以 Teyru 编写，读主机自己的 IANA 数据库——发行版换上新的时区就自动生效；没有 tzdata 的主机拿到的是具名拒绝，不是错误的偏移。它曾是标准库那份「少了什么」清单上的最后一条。",
   factLombokLabel: "注解",
   factLombokText: "兼容 Lombok，在语义分析阶段展开成普通的成员。",
   factWebLabel: "Web 框架",
@@ -205,6 +213,9 @@ const en: Messages = {
   factZipLabel: "Compression",
   factZipText:
     "Deflate and gzip are written in Teyru. Level 0 output is byte-identical to zlib's, and the two inter-operate both ways: it decodes the JDK's output at levels 0, 1, 6 and 9, and the JDK decodes its. The honest half: at level 6 it is about 1.5% larger and about 2.8x slower than zlib (measured) — anyone who checks will find that anyway.",
+  factZoneLabel: "Time zones",
+  factZoneText:
+    "ZoneId, ZoneOffset, ZoneRules and ZonedDateTime are written in Teyru over the host's own IANA database — a distribution that ships a new zone gets it for free, and a host with no tzdata gets a named refusal instead of a wrong offset. It was the last gap the standard library's own list had.",
   factLombokLabel: "Annotations",
   factLombokText: "Lombok-compatible, expanded into ordinary members during semantic analysis.",
   factWebLabel: "Web framework",
