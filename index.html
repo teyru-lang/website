@@ -143,9 +143,11 @@
             <dd data-i18n="factBackendText">
               The C back end is the default; the LLVM back end (--backend=llvm) emits the
               program's own module and names what it cannot lower instead of falling back.
-              Windows x86-64 builds and runs today — 179 of 195 test programs byte-identical
-              under Wine — while macOS and Linux arm64 are implemented but not verified: there
-              is no macOS here and no aarch64 sysroot to install.
+              Windows x86-64 builds and runs — of 302 test programs under Wine, 290 are
+              byte-identical, 11 are refused by name for reaching TLS (no OpenSSL) and 1 is
+              skipped for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole
+              suite under qemu; macOS only reaches "compile and link" — there is no macOS here
+              and nothing has run on it.
             </dd>
           </div>
           <div class="fact">

@@ -82,7 +82,7 @@ const zhTW: Messages = {
   factNativeText: "經由 Go 前端、產生的 C 與 clang/LLVM，編成原生執行檔——沒有 JVM，沒有 bytecode。",
   factBackendLabel: "後端與平台",
   factBackendText:
-    "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 今天編得起來也跑得起來：195 支測試程式有 179 支在 Wine 下逐位元組相同；macOS 與 Linux arm64 有實作但沒有驗證過——這裡沒有 macOS，也裝不了 aarch64 sysroot。",
+    "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 編得起來也跑得起來：302 支測試程式在 Wine 下 290 支逐位元組相同、11 支因碰到 TLS 被具名拒絕（沒有 OpenSSL）、1 支因 NTFS 檔名跳過，0 支不符；Linux arm64 在 qemu 下跑過整套；macOS 只到「編譯並連結」——這裡沒有 macOS，沒有任何程式在它上面跑過。",
   factStdlibLabel: "標準程式庫",
   factStdlibText:
     "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式、stream、時間與文字。",
@@ -142,7 +142,7 @@ const zhCN: Messages = {
   factNativeText: "经由 Go 前端、生成的 C 与 clang/LLVM，编译成原生可执行文件——没有 JVM，没有字节码。",
   factBackendLabel: "后端与平台",
   factBackendText:
-    "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 今天编得起来也跑得起来：195 支测试程序有 179 支在 Wine 下逐字节相同；macOS 与 Linux arm64 有实现但没有验证过——这里没有 macOS，也装不了 aarch64 sysroot。",
+    "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 编得起来也跑得起来：302 支测试程序在 Wine 下 290 支逐字节相同、11 支因碰到 TLS 被具名拒绝（没有 OpenSSL）、1 支因 NTFS 文件名跳过，0 支不符；Linux arm64 在 qemu 下跑过整套；macOS 只到「编译并链接」——这里没有 macOS，没有任何程序在它上面跑过。",
   factStdlibLabel: "标准库",
   factStdlibText:
     "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式、stream、时间与文本。",
@@ -203,7 +203,7 @@ const en: Messages = {
     "Compiled through a Go front end, generated C and clang/LLVM into a native executable — no JVM, no bytecode.",
   factBackendLabel: "Back ends and platforms",
   factBackendText:
-    "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs today — 179 of 195 test programs byte-identical under Wine — while macOS and Linux arm64 are implemented but not verified — there is no macOS here and no aarch64 sysroot to install.",
+    "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs — of 302 test programs under Wine, 290 are byte-identical, 11 are refused by name for reaching TLS (no OpenSSL) and 1 is skipped for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole suite under qemu; macOS only reaches \"compile and link\" — there is no macOS here and nothing has run on it.",
   factStdlibLabel: "Standard library",
   factStdlibText:
     "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions, streams, time and text — and compiled and checked together with every program.",
