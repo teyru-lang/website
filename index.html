@@ -151,6 +151,16 @@
             </dd>
           </div>
           <div class="fact">
+            <dt data-i18n="factToolingLabel">Tooling</dt>
+            <dd data-i18n="factToolingText">
+              A formatter (teyru fmt — idempotent, comments preserved), a language server
+              (teyru lsp — TY-* diagnostics and go-to-definition), a test runner (teyru test —
+              @Test/Assert) and source-level debug information (-g — DWARF points back at the
+              .teyru). CI runs build, vet and the whole suite on every push and pull request,
+              with the CC=gcc leg once a day.
+            </dd>
+          </div>
+          <div class="fact">
             <dt data-i18n="factStdlibLabel">Standard library</dt>
             <dd data-i18n="factStdlibText">
               Written in Teyru itself — collections, Gson-shaped JSON, regular expressions,
