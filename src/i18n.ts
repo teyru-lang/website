@@ -84,7 +84,7 @@ const zhTW: Messages = {
   factNativeText: "經由 Go 前端、產生的 C 與 clang/LLVM，編成原生執行檔——沒有 JVM，沒有 bytecode。",
   factBackendLabel: "後端與平台",
   factBackendText:
-    "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 編得起來也跑得起來：302 支測試程式在 Wine 下 290 支逐位元組相同、11 支因碰到 TLS 被具名拒絕（沒有 OpenSSL）、1 支因 NTFS 檔名跳過，0 支不符；Linux arm64 在 qemu 下跑過整套；macOS 只到「編譯並連結」——這裡沒有 macOS，沒有任何程式在它上面跑過。",
+    "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 編得起來也跑得起來：2026-10-20 量 318 支測試程式，302 支在 Wine 下逐位元組相同、11 支因碰到 TLS 無法連結（具名拒絕，沒有 OpenSSL）、4 支因 Windows 沒有 ucontext 而跳過虛擬執行緒、1 支因 NTFS 檔名跳過，0 支不符；Linux arm64 在 qemu 下跑過整套；macOS 只到「編譯並連結」——這裡沒有 macOS，沒有任何程式在它上面跑過。",
   factToolingLabel: "工具鏈",
   factToolingText:
     "格式化（teyru fmt，冪等、保留註解）、語言伺服器（teyru lsp，TY-* 診斷與定義跳轉）、測試執行器（teyru test，@Test／Assert）與原始碼層級的除錯資訊（-g，DWARF 指回 .teyru）。CI 在每次 push 與 PR 上跑 build、vet 與整套測試，CC=gcc 那條腿每天跑一次。",
@@ -147,7 +147,7 @@ const zhCN: Messages = {
   factNativeText: "经由 Go 前端、生成的 C 与 clang/LLVM，编译成原生可执行文件——没有 JVM，没有字节码。",
   factBackendLabel: "后端与平台",
   factBackendText:
-    "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 编得起来也跑得起来：302 支测试程序在 Wine 下 290 支逐字节相同、11 支因碰到 TLS 被具名拒绝（没有 OpenSSL）、1 支因 NTFS 文件名跳过，0 支不符；Linux arm64 在 qemu 下跑过整套；macOS 只到「编译并链接」——这里没有 macOS，没有任何程序在它上面跑过。",
+    "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 编得起来也跑得起来：2026-10-20 测 318 支测试程序，302 支在 Wine 下逐字节相同、11 支因碰到 TLS 无法链接（具名拒绝，没有 OpenSSL）、4 支因 Windows 没有 ucontext 而跳过虚拟线程、1 支因 NTFS 文件名跳过，0 支不符；Linux arm64 在 qemu 下跑过整套；macOS 只到「编译并链接」——这里没有 macOS，没有任何程序在它上面跑过。",
   factToolingLabel: "工具链",
   factToolingText:
     "格式化（teyru fmt，幂等、保留注释）、语言服务器（teyru lsp，TY-* 诊断与定义跳转）、测试运行器（teyru test，@Test／Assert）与源码级调试信息（-g，DWARF 指回 .teyru）。CI 在每次推送与 PR 上运行 build、vet 与整套测试，CC=gcc 那条腿每天运行一次。",
@@ -211,7 +211,7 @@ const en: Messages = {
     "Compiled through a Go front end, generated C and clang/LLVM into a native executable — no JVM, no bytecode.",
   factBackendLabel: "Back ends and platforms",
   factBackendText:
-    "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs — of 302 test programs under Wine, 290 are byte-identical, 11 are refused by name for reaching TLS (no OpenSSL) and 1 is skipped for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole suite under qemu; macOS only reaches \"compile and link\" — there is no macOS here and nothing has run on it.",
+    "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs — of 318 test programs measured 2026-10-20, 302 are byte-identical under Wine, 11 cannot be linked for reaching TLS (refused by name, no OpenSSL), 4 skip because Windows has no ucontext for virtual threads and 1 skips for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole suite under qemu; macOS only reaches \"compile and link\" — there is no macOS here and nothing has run on it.",
   factToolingLabel: "Tooling",
   factToolingText:
     "A formatter (teyru fmt — idempotent, comments preserved), a language server (teyru lsp — TY-* diagnostics and go-to-definition), a test runner (teyru test — @Test/Assert) and source-level debug information (-g — DWARF points back at the .teyru). CI runs build, vet and the whole suite on every push and pull request, with the CC=gcc leg once a day.",

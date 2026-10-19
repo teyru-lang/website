@@ -143,11 +143,11 @@
             <dd data-i18n="factBackendText">
               The C back end is the default; the LLVM back end (--backend=llvm) emits the
               program's own module and names what it cannot lower instead of falling back.
-              Windows x86-64 builds and runs — of 302 test programs under Wine, 290 are
-              byte-identical, 11 are refused by name for reaching TLS (no OpenSSL) and 1 is
-              skipped for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole
-              suite under qemu; macOS only reaches "compile and link" — there is no macOS here
-              and nothing has run on it.
+              Windows x86-64 builds and runs — of 318 test programs measured 2026-10-20, 302 are
+              byte-identical under Wine, 11 cannot be linked for reaching TLS (refused by name, no
+              OpenSSL), 4 skip because Windows has no ucontext for virtual threads and 1 skips for
+              an NTFS file name, with 0 mismatches; Linux arm64 has run the whole suite under qemu;
+              macOS only reaches "compile and link" — there is no macOS here and nothing has run on it.
             </dd>
           </div>
           <div class="fact">
