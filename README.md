@@ -107,6 +107,7 @@ nothing is below 4.5:1.
 | button label on button                     | 6.99:1   | 8.15:1   |
 | wordmark, lightest end of the gradient     | 12.63:1  | 13.37:1  |
 | code keyword / type / string               | 7.71 / 6.67 / 6.24 | 8.78 / 10.07 / 10.96 |
+| code method name                           | 6.17:1   | 7.29:1   |
 | code punctuation                           | 5.35:1   | 7.15:1   |
 | card header label on the header strip      | 6.71:1   | 7.00:1   |
 | footer install command on its own panel    | 15.72:1  | 15.64:1  |

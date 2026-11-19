@@ -31,7 +31,7 @@
   --tok-keyword: #0b46b8;
   --tok-type: #8a4708;
   --tok-string: #126b3a;
-  --tok-name: #14171c;
+  --tok-function: #6f42c1;
   --tok-punct: #5f6875;
 
   --wordmark-from: #14171c;
@@ -73,7 +73,7 @@
   --tok-keyword: #8fb2ff;
   --tok-type: #f0b37e;
   --tok-string: #86d9a2;
-  --tok-name: #f2f5f8;
+  --tok-function: #b392f0;
   --tok-punct: #97a2b2;
 
   --wordmark-from: #ffffff;
@@ -364,7 +364,10 @@ body {
 }
 
 .tok-f {
-  color: var(--tok-name);
+  /* A method name is not prose: painting it in the body colour made `main` and
+     `println` look like unstyled text. It also has to stay apart from the type
+     colour, which already carries `String` and `System` on the same line. */
+  color: var(--tok-function);
 }
 
 .tok-p {
