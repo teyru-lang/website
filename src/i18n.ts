@@ -93,7 +93,7 @@ const zhTW: Messages = {
     "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式、stream、時間與文字。",
   factDigestLabel: "摘要與位元組",
   factDigestText:
-    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系統 CSPRNG（`SecureRandom`）、CRC32 與 HexFormat 都在 Teyru 裡實作；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系統 CSPRNG（`SecureRandom`）、`Cipher`（AES 的 ECB／CBC／CTR／GCM 與 RSA PKCS#1）、RSA `Signature` 驗證、`KeyFactory`（X.509／PKCS#8）、CRC32 與 HexFormat 都在 Teyru 裡實作，不連結 OpenSSL；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
   factZipLabel: "壓縮",
   factZipText:
     "deflate 與 gzip 以 Teyru 撰寫。level 0 的輸出與 zlib 逐位元組相同，兩邊也互通：它解得開 JDK 在 level 0、1、6、9 的輸出，JDK 也解得開它的。誠實的那一半：level 6 大約比 zlib 大 1.5%、慢 2.8 倍（量測）——會去對的人自己也會發現。",
@@ -156,7 +156,7 @@ const zhCN: Messages = {
     "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式、stream、时间与文本。",
   factDigestLabel: "摘要与字节",
   factDigestText:
-    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系统 CSPRNG（`SecureRandom`）、CRC32 与 HexFormat 都在 Teyru 里实现；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系统 CSPRNG（`SecureRandom`）、`Cipher`（AES 的 ECB／CBC／CTR／GCM 与 RSA PKCS#1）、RSA `Signature` 验证、`KeyFactory`（X.509／PKCS#8）、CRC32 与 HexFormat 都在 Teyru 里实现，不链接 OpenSSL；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
   factZipLabel: "压缩",
   factZipText:
     "deflate 与 gzip 以 Teyru 编写。level 0 的输出与 zlib 逐字节相同，两边也互通：它解得开 JDK 在 level 0、1、6、9 的输出，JDK 也解得开它的。诚实的那一半：level 6 大约比 zlib 大 1.5%、慢 2.8 倍（测量）——会去对的人自己也会发现。",
@@ -220,7 +220,7 @@ const en: Messages = {
     "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions, streams, time and text — and compiled and checked together with every program.",
   factDigestLabel: "Digests and bytes",
   factDigestText:
-    "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), HMAC (`javax.crypto.Mac`), the system CSPRNG (`SecureRandom`), CRC32 and HexFormat are implemented in Teyru, and the buffered and binary streams speak Java's modified UTF-8. There is a Scanner too.",
+    "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), HMAC (`javax.crypto.Mac`), the system CSPRNG (`SecureRandom`), `Cipher` (AES in ECB/CBC/CTR/GCM and RSA PKCS#1), RSA `Signature` verification, `KeyFactory` (X.509/PKCS#8), CRC32 and HexFormat are implemented in Teyru with no OpenSSL linked; the buffered and binary streams speak Java's modified UTF-8, and there is a Scanner too.",
   factZipLabel: "Compression",
   factZipText:
     "Deflate and gzip are written in Teyru. Level 0 output is byte-identical to zlib's, and the two inter-operate both ways: it decodes the JDK's output at levels 0, 1, 6 and 9, and the JDK decodes its. The honest half: at level 6 it is about 1.5% larger and about 2.8x slower than zlib (measured) — anyone who checks will find that anyway.",
