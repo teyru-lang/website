@@ -87,13 +87,13 @@ const zhTW: Messages = {
     "C 後端是預設；LLVM 後端（--backend=llvm）產生程式自己的 LLVM IR 模組，對它降不下去的建構直接指名拒絕，而不是退回 C。Windows x86-64 編得起來也跑得起來：2026-10-20 量 318 支測試程式，302 支在 Wine 下逐位元組相同、11 支因碰到 TLS 無法連結（具名拒絕，沒有 OpenSSL）、4 支因 Windows 沒有 ucontext 而跳過虛擬執行緒、1 支因 NTFS 檔名跳過，0 支不符；Linux arm64 在 qemu 下跑過整套；macOS 只到「編譯並連結」——這裡沒有 macOS，沒有任何程式在它上面跑過。",
   factToolingLabel: "工具鏈",
   factToolingText:
-    "格式化（teyru fmt，冪等、保留註解）、語言伺服器（teyru lsp，TY-* 診斷與定義跳轉）、測試執行器（teyru test，@Test／Assert）與原始碼層級的除錯資訊（-g，DWARF 指回 .teyru）。CI 在每次 push 與 PR 上跑 build、vet 與整套測試，CC=gcc 那條腿每天跑一次。",
+    "格式化（teyru fmt，冪等、保留註解）、語言伺服器（teyru lsp，TY-* 診斷與定義跳轉）、測試執行器（teyru test，@Test／Assert；每個測試的 stdout 被捕捉、逾時指名卡住的測試、`-run`／`-tag` 選取）與原始碼層級的除錯資訊（-g，DWARF 指回 .teyru）。CI 在每次 push 與 PR 上跑 build、vet 與整套測試，CC=gcc 那條腿每天跑一次。",
   factStdlibLabel: "標準程式庫",
   factStdlibText:
     "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式、stream、時間與文字。",
   factDigestLabel: "摘要與位元組",
   factDigestText:
-    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 與 HexFormat 都在 Teyru 裡實作；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系統 CSPRNG（`SecureRandom`）、CRC32 與 HexFormat 都在 Teyru 裡實作；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
   factZipLabel: "壓縮",
   factZipText:
     "deflate 與 gzip 以 Teyru 撰寫。level 0 的輸出與 zlib 逐位元組相同，兩邊也互通：它解得開 JDK 在 level 0、1、6、9 的輸出，JDK 也解得開它的。誠實的那一半：level 6 大約比 zlib 大 1.5%、慢 2.8 倍（量測）——會去對的人自己也會發現。",
@@ -150,13 +150,13 @@ const zhCN: Messages = {
     "C 后端是默认；LLVM 后端（--backend=llvm）生成程序自己的 LLVM IR 模块，对它降不下去的构造直接指名拒绝，而不是退回 C。Windows x86-64 编得起来也跑得起来：2026-10-20 测 318 支测试程序，302 支在 Wine 下逐字节相同、11 支因碰到 TLS 无法链接（具名拒绝，没有 OpenSSL）、4 支因 Windows 没有 ucontext 而跳过虚拟线程、1 支因 NTFS 文件名跳过，0 支不符；Linux arm64 在 qemu 下跑过整套；macOS 只到「编译并链接」——这里没有 macOS，没有任何程序在它上面跑过。",
   factToolingLabel: "工具链",
   factToolingText:
-    "格式化（teyru fmt，幂等、保留注释）、语言服务器（teyru lsp，TY-* 诊断与定义跳转）、测试运行器（teyru test，@Test／Assert）与源码级调试信息（-g，DWARF 指回 .teyru）。CI 在每次推送与 PR 上运行 build、vet 与整套测试，CC=gcc 那条腿每天运行一次。",
+    "格式化（teyru fmt，幂等、保留注释）、语言服务器（teyru lsp，TY-* 诊断与定义跳转）、测试运行器（teyru test，@Test／Assert；每个测试的 stdout 被捕捉、超时指名卡住的测试、`-run`／`-tag` 选取）与源码级调试信息（-g，DWARF 指回 .teyru）。CI 在每次推送与 PR 上运行 build、vet 与整套测试，CC=gcc 那条腿每天运行一次。",
   factStdlibLabel: "标准库",
   factStdlibText:
     "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式、stream、时间与文本。",
   factDigestLabel: "摘要与字节",
   factDigestText:
-    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、CRC32 与 HexFormat 都在 Teyru 里实现；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
+    "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系统 CSPRNG（`SecureRandom`）、CRC32 与 HexFormat 都在 Teyru 里实现；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
   factZipLabel: "压缩",
   factZipText:
     "deflate 与 gzip 以 Teyru 编写。level 0 的输出与 zlib 逐字节相同，两边也互通：它解得开 JDK 在 level 0、1、6、9 的输出，JDK 也解得开它的。诚实的那一半：level 6 大约比 zlib 大 1.5%、慢 2.8 倍（测量）——会去对的人自己也会发现。",
@@ -214,13 +214,13 @@ const en: Messages = {
     "The C back end is the default; the LLVM back end (--backend=llvm) emits the program's own module and names what it cannot lower instead of falling back. Windows x86-64 builds and runs — of 318 test programs measured 2026-10-20, 302 are byte-identical under Wine, 11 cannot be linked for reaching TLS (refused by name, no OpenSSL), 4 skip because Windows has no ucontext for virtual threads and 1 skips for an NTFS file name, with 0 mismatches; Linux arm64 has run the whole suite under qemu; macOS only reaches \"compile and link\" — there is no macOS here and nothing has run on it.",
   factToolingLabel: "Tooling",
   factToolingText:
-    "A formatter (teyru fmt — idempotent, comments preserved), a language server (teyru lsp — TY-* diagnostics and go-to-definition), a test runner (teyru test — @Test/Assert) and source-level debug information (-g — DWARF points back at the .teyru). CI runs build, vet and the whole suite on every push and pull request, with the CC=gcc leg once a day.",
+    "A formatter (teyru fmt — idempotent, comments preserved), a language server (teyru lsp — TY-* diagnostics and go-to-definition), a test runner (teyru test — @Test/Assert, per-test stdout capture, a timeout that names the hung test, `-run`/`-tag` selection) and source-level debug information (-g — DWARF points back at the .teyru). CI runs build, vet and the whole suite on every push and pull request, with the CC=gcc leg once a day.",
   factStdlibLabel: "Standard library",
   factStdlibText:
     "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions, streams, time and text — and compiled and checked together with every program.",
   factDigestLabel: "Digests and bytes",
   factDigestText:
-    "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), CRC32 and HexFormat are implemented in Teyru, and the buffered and binary streams speak Java's modified UTF-8. There is a Scanner too.",
+    "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), HMAC (`javax.crypto.Mac`), the system CSPRNG (`SecureRandom`), CRC32 and HexFormat are implemented in Teyru, and the buffered and binary streams speak Java's modified UTF-8. There is a Scanner too.",
   factZipLabel: "Compression",
   factZipText:
     "Deflate and gzip are written in Teyru. Level 0 output is byte-identical to zlib's, and the two inter-operate both ways: it decodes the JDK's output at levels 0, 1, 6 and 9, and the JDK decodes its. The honest half: at level 6 it is about 1.5% larger and about 2.8x slower than zlib (measured) — anyone who checks will find that anyway.",
