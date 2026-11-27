@@ -90,7 +90,7 @@ const zhTW: Messages = {
     "格式化（teyru fmt，冪等、保留註解）、語言伺服器（teyru lsp，TY-* 診斷與定義跳轉）、測試執行器（teyru test，@Test／Assert；每個測試的 stdout 被捕捉、逾時指名卡住的測試、`-run`／`-tag` 選取）與原始碼層級的除錯資訊（-g，DWARF 指回 .teyru）。CI 在每次 push 與 PR 上跑 build、vet 與整套測試，CC=gcc 那條腿每天跑一次。",
   factStdlibLabel: "標準程式庫",
   factStdlibText:
-    "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式（前後視、反向參考、具名群組、佔有量詞、`\\p{...}`）、stream、時間與文字、地區化（每個 locale 的數字、貨幣與日期 pattern 讀自 OpenJDK 21），以及四個資料格式——CSV、TOML 1.0、XML 1.0 與 YAML 1.2，各自拒絕它沒實作的建構（XML 的 `DOCTYPE` 是防 XXE 的具名拒絕）。",
+    "以 Teyru 本身撰寫，與每個程式一起編譯與檢查：集合、Gson 形狀的 JSON 綁定、規則表達式（前後視、反向參考、具名群組、佔有量詞、`\\p{...}`）、stream、時間與文字、地區化（每個 locale 的數字、貨幣與日期 pattern 讀自 OpenJDK 21），以及四個資料格式——CSV、TOML 1.0、XML 1.0 與 YAML 1.2，各自拒絕它沒實作的建構（XML 的 `DOCTYPE` 是防 XXE 的具名拒絕），以及執行器與同步器——`CompletableFuture`、`ReentrantReadWriteLock`、`Exchanger`、`Semaphore`、`CountDownLatch`，全部是監視器而不是 lock-free。",
   factDigestLabel: "摘要與位元組",
   factDigestText:
     "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系統 CSPRNG（`SecureRandom`）、`Cipher`（AES 的 ECB／CBC／CTR／GCM 與 RSA PKCS#1）、RSA `Signature` 驗證、`KeyFactory`（X.509／PKCS#8）、CRC32 與 HexFormat 都在 Teyru 裡實作，不連結 OpenSSL；緩衝與二進位資料流說 Java 的 modified UTF-8，還有一個 Scanner。",
@@ -153,7 +153,7 @@ const zhCN: Messages = {
     "格式化（teyru fmt，幂等、保留注释）、语言服务器（teyru lsp，TY-* 诊断与定义跳转）、测试运行器（teyru test，@Test／Assert；每个测试的 stdout 被捕捉、超时指名卡住的测试、`-run`／`-tag` 选取）与源码级调试信息（-g，DWARF 指回 .teyru）。CI 在每次推送与 PR 上运行 build、vet 与整套测试，CC=gcc 那条腿每天运行一次。",
   factStdlibLabel: "标准库",
   factStdlibText:
-    "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式（环视、反向引用、具名组、占有量词、`\\p{...}`）、stream、时间与文本、地区化（每个 locale 的数字、货币与日期 pattern 读自 OpenJDK 21），以及四个数据格式——CSV、TOML 1.0、XML 1.0 与 YAML 1.2，各自拒绝它没实现的构造（XML 的 `DOCTYPE` 是防 XXE 的具名拒绝）。",
+    "用 Teyru 本身编写，与每个程序一起编译与检查：集合、Gson 形状的 JSON 绑定、正则表达式（环视、反向引用、具名组、占有量词、`\\p{...}`）、stream、时间与文本、地区化（每个 locale 的数字、货币与日期 pattern 读自 OpenJDK 21），以及四个数据格式——CSV、TOML 1.0、XML 1.0 与 YAML 1.2，各自拒绝它没实现的构造（XML 的 `DOCTYPE` 是防 XXE 的具名拒绝），以及执行器与同步器——`CompletableFuture`、`ReentrantReadWriteLock`、`Exchanger`、`Semaphore`、`CountDownLatch`，全部是监视器而不是 lock-free。",
   factDigestLabel: "摘要与字节",
   factDigestText:
     "MessageDigest（MD5、SHA-1、SHA-224／256／384／512）、HMAC（`javax.crypto.Mac`）、系统 CSPRNG（`SecureRandom`）、`Cipher`（AES 的 ECB／CBC／CTR／GCM 与 RSA PKCS#1）、RSA `Signature` 验证、`KeyFactory`（X.509／PKCS#8）、CRC32 与 HexFormat 都在 Teyru 里实现，不链接 OpenSSL；缓冲与二进制数据流说 Java 的 modified UTF-8，还有一个 Scanner。",
@@ -217,7 +217,7 @@ const en: Messages = {
     "A formatter (teyru fmt — idempotent, comments preserved), a language server (teyru lsp — TY-* diagnostics and go-to-definition), a test runner (teyru test — @Test/Assert, per-test stdout capture, a timeout that names the hung test, `-run`/`-tag` selection) and source-level debug information (-g — DWARF points back at the .teyru). CI runs build, vet and the whole suite on every push and pull request, with the CC=gcc leg once a day.",
   factStdlibLabel: "Standard library",
   factStdlibText:
-    "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions (lookaround, backreferences, named groups, possessive quantifiers, `\\p{...}`), streams, time and text, locales (each locale's number, currency and date patterns read out of OpenJDK 21), and four data formats: CSV, TOML 1.0, XML 1.0 and YAML 1.2, each refusing what it does not implement (XML's `DOCTYPE` is a named refusal that closes the XXE hole) — and compiled and checked together with every program.",
+    "Written in Teyru itself — collections, Gson-shaped JSON, regular expressions (lookaround, backreferences, named groups, possessive quantifiers, `\\p{...}`), streams, time and text, locales (each locale's number, currency and date patterns read out of OpenJDK 21), and four data formats: CSV, TOML 1.0, XML 1.0 and YAML 1.2, each refusing what it does not implement (XML's `DOCTYPE` is a named refusal that closes the XXE hole), and executors and synchronizers — `CompletableFuture`, `ReentrantReadWriteLock`, `Exchanger`, `Semaphore`, `CountDownLatch`, all monitors rather than lock-free — compiled and checked together with every program.",
   factDigestLabel: "Digests and bytes",
   factDigestText:
     "MessageDigest (MD5, SHA-1, SHA-224/256/384/512), HMAC (`javax.crypto.Mac`), the system CSPRNG (`SecureRandom`), `Cipher` (AES in ECB/CBC/CTR/GCM and RSA PKCS#1), RSA `Signature` verification, `KeyFactory` (X.509/PKCS#8), CRC32 and HexFormat are implemented in Teyru with no OpenSSL linked; the buffered and binary streams speak Java's modified UTF-8, and there is a Scanner too.",
